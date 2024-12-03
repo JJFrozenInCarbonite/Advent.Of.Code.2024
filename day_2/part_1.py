@@ -2,7 +2,7 @@ import math
 
 source = 'day_2\\input.txt'
 
-data = open(source).read()   
+data = open(source).read()
 
 lines = data.split('\n')
 reports = [[int(level) for level in report.split(' ')] for report in lines]
