@@ -42,7 +42,6 @@ if __name__ == '__main__':
             else:
                 break
     
-    time_blocks = []
     while True:
         i, j = guard
         if direction == '^':
@@ -94,3 +93,4 @@ if __name__ == '__main__':
             exit()
 
 print(len(visited))
+print(visited)
