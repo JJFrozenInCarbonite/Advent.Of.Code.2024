@@ -1,4 +1,5 @@
 import copy
+import itertools
 
 source = 'day_7\\input.txt'
 
@@ -34,26 +35,43 @@ def get_operations(operators, terms):
     exit()
     return computations
     
+def getAnswer(line) -> int:
+    return int(line.split(': ')[0])
+
+def getTerms(line) -> list[int]:
+    terms = line.split(': ')[1].split(' ') 
+    return [int(term) for term in terms]
+
+def getOperations(operators, terms):
+    operations = []
+    temp = ['+', '+','+', '+','+', '+','+', '+','+', '*', '*', '*', '*', '*', '*', '*', '*', '*']
+    for i in range(0, (len(terms) - 1) * len(operators)):
+        operation = []
+        for j in range(len(terms) - 1, -1):
+            
+
+    print(terms)
+    print(operations)
+    print(len(operations))
+    exit()
+    
+
+        
+        
 
 if __name__ == '__main__':
     operators = ['*', '+']
     data = open(source).read()
     numbers = []
     for line in data.split('\n'):
-        answer, terms = line.split(': ')
-        answer = int(answer)
-        terms = [int(term) for term in terms.split(' ')]
-        numbers.append([answer, terms])
+        answer = getAnswer(line)
+        terms = getTerms(line)
+        equations = getOperations(operators, terms)
+        
+        
+
     
-    combinations = []
-    for answer, terms in numbers:
-        combinations.append(get_operations(operators, terms))
     
-    total = 0
-    for i, combination in enumerate(combinations):
-        sub_total = 0
-        answer = numbers[i][0]
-        print(answer, combination)
         
             
         
