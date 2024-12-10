@@ -1,44 +1,79 @@
-import copy
+from datetime import datetime, timedelta
+import time
+import pytz
+import itertools
 
-source = 'day_6\\input.txt'
+source = 'day_7\\input.txt'
+    
+def getAnswer(line) -> int:
+    return int(line.split(': ')[0])
+
+def getTerms(line) -> list[int]:
+    terms = line.split(': ')[1].split(' ') 
+    return [int(term) for term in terms]
+
+def execute(operation, terms):
+    result = terms[0]
+    for i, term in enumerate(terms[1:]):
+        if operation[i] == '*':
+            result *= term
+        elif operation[i] == '+':
+            result += term
+        elif operation[i] == '||':
+            result = int(str(result) + str(term))
+        else:
+            print("Impossible:", operation[i])
+            exit(1)
+    return result
+    
 
 if __name__ == '__main__':
+    operators = ['*', '+', '||']
     data = open(source).read()
-
-
-    blocked = []
-    guard = []
-    visited = []
-    direction = ''
-
-    grid = [[char for char in row] for row in data.split('\n')]
-    
-    height = len(grid)
-    width = len(grid[0])
-
-    i = j = 0
-    while True:
-        char = grid[i][j]
-        if char == '^':
-            guard = [i,j]
-            direction = char
-        elif char == 'v':
-            guard = [i, j]
-            direction = char
-        elif char == '>':
-            guard = [i, j]
-            direction = char
-        elif char == '<':
-            guard = [i, j]
-            direction = char
-        if char == '#':
-            blocked.append([i,j])
-        if i < width - 1:
-            i += 1
-        else:
-            if j < height - 1:
-                i = 0
-                j += 1
-            else:
+    total_result = 0
+    for j, line in enumerate(data.split('\n')):
+        print(f"{j}) Evaluating Line:", line)
+        start= datetime.now()
+        answer = getAnswer(line)
+        terms = getTerms(line)
+        operations = list(itertools.product(operators, repeat=len(terms) - 1))
+        for i, operation in enumerate(operations):
+            result = execute(operation, terms)
+            if answer == result:
+                total_result += result
                 break
+        print("  Done. Total Time:", datetime.now() - start)
+    print(total_result)
     
+        
+
+    
+    
+        
+            
+        
+        
+    
+        #for i in range(0, len(terms) - 1):
+            
+    
+    """     for i,term in enumerate(terms):
+            print(term, end='')
+            print(operations)
+     """        
+
+    
+                
+        
+        
+
+
+                
+
+
+        
+            
+
+        
+
+#[[answer], [terms]]
